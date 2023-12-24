@@ -1,0 +1,21 @@
+name: Build, Test and Deploy Postagram
+
+on:
+    push:
+        branches: [main]
+
+jobs:
+    build-test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/chekout@v2
+            - name: Injecting env vars
+              run: echo "SECRET_KEY"=test_foo
+            - name: Building containers
+              run: docker-compose up -d --build
+            - name: Runing Tests
+              run: docker-compose exec -T api pytest
+        
+        
+
+
