@@ -8,7 +8,7 @@ jobs:
     build-test:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2              
+            - uses: actions/checkout@v3
             - name: Injecting env vars
               run: |
                 echo "SECRET_KEY=test_foo
