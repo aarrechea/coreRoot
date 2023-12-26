@@ -1,5 +1,11 @@
 """ Imports """
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+
+load_dotenv()
+ENV = os.environ.get("ENV")
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -11,8 +17,8 @@ SECRET_KEY = 'django-insecure-%r4c98des%8)ifbi+2%u*x7=yc+pmv6@d#ly9*^bbnz*ph8w5f
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-ALLOWED_HOSTS = []
+DEBUG = False if ENV == "PROD" else True
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", default="*").split(",")
 
 
 # Application definition
@@ -93,11 +99,11 @@ WSGI_APPLICATION = 'CoreRoot.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'coredb',
-        'USER': 'admin',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.getenv("DATABASE_NAME","coredb"),
+        'USER': os.getenv("DATABASE_USER", "core"),
+        'PASSWORD': os.getenv("DATABASE_PASSWORD", "WcH29&he&t83"),
+        'HOST': os.environ.get("DATABASE_HOST", "localhost"),
+        'PORT': os.getenv("DATABASE_PORT", "5432"),
     }
 }
 
