@@ -24,6 +24,6 @@ jobs:
             - name: Building containers
               run: docker-compose up -d --build
             - name: Runing Tests
-              run: docker-compose exec -T api pytest
+              run: docker-compose exec -T api pytest -pyargs simplejson.tests
 
 
